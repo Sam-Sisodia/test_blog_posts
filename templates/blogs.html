@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% load static %}
+<body>
+    <header>
+      
+        <nav>
+            <!-- Navigation links go here -->
+        </nav>
+    </header>
+    <main>
+      <center>
+        <h1>Blogs</h1>
+        <br> 
+
+        <article>
+          {% for  blog in all_blogs %}
+          
+            <h2><a href="{% url 'detail-page' blog.id %}">{{ blog.title }}</a></h2>
+            <p>Published {{ blog.date_time }} by  admin </p>
+            {{blog.description}} <br><br><br>
+            {% endfor %}
+        </article>
+      <br>
+      <br>
+    
+        {% if all_blogs.has_previous %}
+            <a href="?page={{ all_blogs.previous_page_number }}">Previous</a>
+        {% endif %}
+
+        <span>Page {{ all_blogs.number }} of {{ all_blogs.paginator.num_pages }}.</span>
+        
+        {% if all_blogs.has_next %}
+            <a href="?page={{ all_blogs.next_page_number }}">Next</a>
+        {% endif %}
+  
+    
+    </main>
+    
+  </center>
+    <aside>
+        <!-- Sidebar content goes here -->
+    </aside>
+    <footer>
+        <!-- Footer content goes here -->
+    </footer>
+</body>
+
+
+{% endblock %}
